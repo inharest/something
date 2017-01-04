@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Anything</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <style media="screen">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 44px;
+            line-height: 44px;
+            color: #fff;
+            background-color: #229de5;
+        }
+
+        .header~.content {
+            margin-top: 44px;
+        }
+
+        .content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .content .menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            overflow-y: scroll;
+            background-color: #f7f7f7;
+        }
+
+        .content .main {
+            margin-left: 200px;
+            height: 100%;
+            overflow-y: scroll;
+            background-color: #f5f5e5;
+        }
+
+        .title {
+            margin-left: 10px;
+        }
+
+        table,
+        .table {
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        input[readonly] {
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <span class="title">Anything</span>
+    </header>
+    <div class="content">
+        <div class="menu">
+            <ul>
+                <li><a href="#">Study System</a></li>
+                <li><a href="#">Media System</a></li>
+                <li><a href="#">Audio System</a></li>
+                <li><a href="#">Video System</a></li>
+                <li><a href="#">Document System</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="tool">
+                <!-- create read update delete -->
+                <button type="button" name="create">Create</button>
+                <button type="button" name="delete">Delete</button>
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>#</th>
+                        <th>Id</th>
+                        <th>OS</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th>Name</th>
+                        <th>Extension</th>
+                        <!-- <th>Md5</th> -->
+                        <th>Option</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>Windows</td>
+                        <td>Active</td>
+                        <td>Microsoft</td>
+                        <td>Windows loader</td>
+                        <td>.exe</td>
+                        <!-- <td>4fa6724cbc88923adc40e544825a8884</td> -->
+                        <td>
+                            <button type="button" name="button">Update</button>
+                            <!-- <button type="button" name="sync">Sync</button>
+                          <button type="button" name="download">Download</button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <form class="form" action="/admin/create" method="post" enctype="multipart/form-data">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><label for="brand">brand</label></td>
+                            <td><input type="text" name="brand" id="brand"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="os">os</label></td>
+                            <td><input type="text" name="os" id="os"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="category">category</label></td>
+                            <td><input type="text" name="category" id="category"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="name">name</label></td>
+                            <td><input type="text" name="name" id="name"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="extension">extension</label></td>
+                            <td><input type="text" name="extension" id="extension" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><label for="size">size</label></td>
+                            <td><input type="text" name="size" value="0" id="size" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><label for="md5">md5</label></td>
+                            <td><input type="text" name="md5" id="md5" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><label for="file">file</label></td>
+                            <td><input type="file" name="file" id="file"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="submit"value="submit">
+            </form>
+        </div>
+    </div>
+    <script src="public/js/me.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        console.log('This is a javascript program!');
+        var fileEl = document.getElementById('file');
+        var nameEl = document.getElementById('name');
+        var sizeEl = document.getElementById('size');
+        var extensionEl = document.getElementById('extension');
+        fileEl.addEventListener('change', function(e) {
+            // e.preventDefault();
+            var context = this;
+            console.log(context.files);
+            var f = context.files[0];
+            console.log(f);
+            var fnreg = /^([\w\d-_\.]*)(\.[\w\d]*)$/i;
+            var fnmatchs = fnreg.exec(f.name);
+            nameEl.value = fnmatchs[1];
+            extensionEl.value = fnmatchs[2];
+            sizeEl.value = f.size;
+        });
+    </script>
+</body>
+
+</html>
